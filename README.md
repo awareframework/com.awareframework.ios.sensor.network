@@ -1,5 +1,7 @@
 # AWARE: Network
 
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+
 This package implements the iOS network sensor for AWARE-compatible clients.
 
 It records Wi-Fi/mobile connectivity state in `ios_network` and interface traffic counters in
