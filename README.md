@@ -1,4 +1,4 @@
-# AWARE Network Sensor
+# AWARE: Network
 
 This package implements the iOS network sensor for AWARE-compatible clients.
 
@@ -19,7 +19,7 @@ Then add the product to your target:
 .product(name: "com.awareframework.ios.sensor.network", package: "com.awareframework.ios.sensor.network")
 ```
 
-## Usage
+## Example Usage
 
 ```swift
 import com_awareframework_ios_sensor_network
@@ -28,7 +28,7 @@ let sensor = NetworkSensor(NetworkSensor.Config().apply { config in
     config.dbType = .sqlite
     config.dbPath = "aware_network"
     config.dbTableName = NetworkData.databaseTableName
-    config.interval = 60
+    config.sampleIntervalSeconds = 60
     config.statusEventsEnabled = true
     config.trafficEnabled = true
 })
@@ -36,19 +36,21 @@ let sensor = NetworkSensor(NetworkSensor.Config().apply { config in
 sensor.start()
 ```
 
-`NetworkSensor.Config` extends the common AWARE `SensorConfig`.
+### NetworkSensor.Config
 
-| Property | Type | Default | Description |
-| --- | --- | --- | --- |
-| `interval` | `Int` | `60` | Traffic sampling interval in seconds. |
-| `statusEventsEnabled` | `Bool` | `true` | Enables Wi-Fi/mobile/internet availability events. |
-| `trafficEnabled` | `Bool` | `true` | Enables interface traffic sampling. |
-| `includeLoopback` | `Bool` | `false` | Includes loopback interfaces when sampling. |
-| `sensorObserver` | `NetworkObserver?` | `nil` | Callback for live status and traffic samples. |
-| `dbPath` | `String?` | `aware_network` | SQLite database path. |
-| `dbTableName` | `String?` | `ios_network` in AwareClient | Active status table name. |
+Class to hold the configuration of the sensor.
 
-## Data
+#### Fields
+
++ `sampleIntervalSeconds: Int`: Traffic sampling interval in seconds. (default = `60`)
++ `statusEventsEnabled: Bool`: Enables Wi-Fi/mobile/internet availability events. (default = `true`)
++ `trafficEnabled: Bool`: Enables interface traffic sampling. (default = `true`)
++ `includeLoopback: Bool`: Includes loopback interfaces when sampling. (default = `false`)
++ `sensorObserver: NetworkObserver?`: Callback for live status and traffic samples. (default = `nil`)
++ `dbPath: String?`: SQLite database path. (default = `"aware_network"`)
++ `dbTableName: String?`: Active status table name. (default = `"ios_network"` in AwareClient)
+
+## Data Representations
 
 `NetworkData` stores connectivity state:
 
@@ -73,7 +75,7 @@ sensor.start()
 
 The first traffic sample has zero deltas because there is no previous counter snapshot.
 
-## Notifications
+## Broadcasts
 
 | Notification | Description |
 | --- | --- |

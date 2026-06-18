@@ -88,15 +88,15 @@ public class NetworkSensor: AwareSensor {
         public var statusEventsEnabled: Bool = true
         public var trafficEnabled: Bool = true
         public var includeLoopback: Bool = false
-        public var interval: Int = 60 {
+        public var sampleIntervalSeconds: Int = 60 {
             didSet {
-                if interval <= 0 {
+                if sampleIntervalSeconds <= 0 {
                     if debug {
                         print(
                             NetworkSensor.TAG,
-                            "The interval parameter must be greater than 0. Keeping \(oldValue).")
+                            "The sampleIntervalSeconds parameter must be greater than 0. Keeping \(oldValue).")
                     }
-                    interval = oldValue
+                    sampleIntervalSeconds = oldValue
                 }
             }
         }
@@ -109,8 +109,8 @@ public class NetworkSensor: AwareSensor {
         public convenience init(_ config: Dictionary<String, Any>) {
             self.init()
             set(config: config)
-            if let interval = config["interval"] as? Int {
-                self.interval = interval
+            if let sampleIntervalSeconds = config["sampleIntervalSeconds"] as? Int {
+                self.sampleIntervalSeconds = sampleIntervalSeconds
             }
             if let statusEventsEnabled = config["statusEventsEnabled"] as? Bool {
                 self.statusEventsEnabled = statusEventsEnabled
@@ -160,8 +160,8 @@ public class NetworkSensor: AwareSensor {
             }
             let timer = DispatchSource.makeTimerSource(queue: trafficQueue)
             timer.schedule(
-                deadline: .now() + .seconds(max(1, CONFIG.interval)),
-                repeating: .seconds(max(1, CONFIG.interval)))
+                deadline: .now() + .seconds(max(1, CONFIG.sampleIntervalSeconds)),
+                repeating: .seconds(max(1, CONFIG.sampleIntervalSeconds)))
             timer.setEventHandler { [weak self] in
                 self?.sampleTraffic()
             }
