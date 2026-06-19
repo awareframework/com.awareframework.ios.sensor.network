@@ -108,3 +108,9 @@ final class Observer: NetworkObserver {
 The traffic implementation uses iOS/macOS interface counters exposed through `getifaddrs`.
 It monitors Wi-Fi as `en0` and cellular interfaces as `pdp_ip*`. iOS does not expose per-app
 network byte counts through public APIs, so these values represent interface-level counters.
+
+## Related Links
+
+- [Network | Apple Developer Documentation](https://developer.apple.com/documentation/network)
+- [NWPathMonitor | Apple Developer Documentation](https://developer.apple.com/documentation/network/nwpathmonitor)
+- [NWPath | Apple Developer Documentation](https://developer.apple.com/documentation/network/nwpath)
