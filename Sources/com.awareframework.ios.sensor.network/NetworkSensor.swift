@@ -339,7 +339,7 @@ public class NetworkSensor: AwareSensor {
 
     private func syncTable(_ tableName: String, syncConfig: DbSyncConfig) {
         guard let baseEngine = dbEngine else { return }
-        let tableSyncConfig = Self.copy(syncConfig)
+        let tableSyncConfig = syncConfig.copy()
         let engine =
             tableName == CONFIG.dbTableName
             ? baseEngine
@@ -365,27 +365,6 @@ public class NetworkSensor: AwareSensor {
                 userInfo: userInfo)
         }
         engine.startSync(tableSyncConfig)
-    }
-
-    private static func copy(_ config: DbSyncConfig) -> DbSyncConfig {
-        let clone = DbSyncConfig()
-        clone.removeAfterSync = config.removeAfterSync
-        clone.batchSize = config.batchSize
-        clone.markAsSynced = config.markAsSynced
-        clone.skipSyncedData = config.skipSyncedData
-        clone.keepLastData = config.keepLastData
-        clone.deviceId = config.deviceId
-        clone.debug = config.debug
-        clone.debugLevel = config.debugLevel
-        clone.progressHandler = config.progressHandler
-        clone.dispatchQueue = config.dispatchQueue
-        clone.backgroundSession = config.backgroundSession
-        clone.compactDataFormat = config.compactDataFormat
-        clone.serverType = config.serverType
-        clone.studyNumber = config.studyNumber
-        clone.studyKey = config.studyKey
-        clone.test = config.test
-        return clone
     }
 
     static func interfaceType(for interfaceName: String) -> (networkType: Int, trafficType: Int, subtype: String)? {
