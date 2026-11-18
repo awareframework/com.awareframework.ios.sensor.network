@@ -9,17 +9,15 @@ It records Wi-Fi/mobile connectivity state in `ios_network` and interface traffi
 
 ## Installation
 
-Add the package to your Swift package dependencies:
+Add the package with Swift Package Manager:
 
-```swift
-.package(url: "https://github.com/awareframework/com.awareframework.ios.sensor.network.git", from: "1.0.0")
-```
+- Package URL: `https://github.com/awareframework/com.awareframework.ios.sensor.network.git`
+- Product: `com.awareframework.ios.sensor.network`
+- Module: `import com_awareframework_ios_sensor_network`
 
-Then add the product to your target:
+See the [core package README](https://github.com/awareframework/com.awareframework.ios.core#installation) for the Xcode, `Package.swift` and command-line installation steps.
 
-```swift
-.product(name: "com.awareframework.ios.sensor.network", package: "com.awareframework.ios.sensor.network")
-```
+**Info.plist:** no usage description is required.
 
 ## Example Usage
 
